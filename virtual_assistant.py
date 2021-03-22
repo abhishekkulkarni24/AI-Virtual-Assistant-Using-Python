@@ -22,4 +22,20 @@ def wish():
     else:
         assistantVoice("Good Evening Sir")   
 
-wish()        
+def takeCommand():
+    r = sr.Recognizer()
+    with sr.Microphone() as source:
+        print("Listening....")
+        r.pause_threshold=1
+        audio=r.listen(source)    
+    try:
+        print("Recognizing....")
+        query = r.recognize_google(audio,language='en-in')
+        print("user said " + query)
+    except Exception as e:
+        print(e)
+        assistantVoice("Sorry.. Say that again please")   
+        return "None"
+    return query   
+
+takeCommand()
