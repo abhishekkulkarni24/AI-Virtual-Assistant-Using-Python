@@ -34,8 +34,19 @@ def takeCommand():
         print("user said " + query)
     except Exception as e:
         print(e)
-        assistantVoice("Sorry.. Say that again please")   
+        print("Sorry.. Say that again please")   
         return "None"
     return query   
 
-takeCommand()
+wish()
+status = True
+while status:
+    query = takeCommand().lower()
+    if "what is" in query or "who is" in query:
+        assistantVoice("searching in wekipedia")
+        query = query.replace("wikipedia","")
+        result = wikipedia.summary(query,sentences=2)
+        print(result)
+        assistantVoice(result)
+    else:
+        pass            
